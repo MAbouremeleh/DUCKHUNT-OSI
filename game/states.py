@@ -54,7 +54,8 @@ class BaseState(object):
 
         surface = self.registry.get('surface')
         controlImgs = self.registry.get('controlImgs')
-        font = pygame.font.Font(FONT, adjheight (20))
+        ah20 = int(adjheight(20))
+        font = pygame.font.Font(FONT,ah20)
         line1 = font.render(str(self.notices[0]), True, (255, 255, 255))
         line2 = font.render(str(self.notices[1]), True, (255, 255, 255))
         x, y = NOTICE_POSITION
@@ -71,7 +72,8 @@ class BaseState(object):
         controlImgs = self.registry.get('controlImgs')
 
         # Show round number
-        font = pygame.font.Font(FONT, adjheight (20))
+        ah20 = int(adjheight(20))
+        font = pygame.font.Font(FONT,ah20)
         text = font.render(("R= %d" % round), True, FONT_GREEN, FONT_BLACK);
         surface.blit(text, ROUND_POSITION);
 
@@ -95,8 +97,9 @@ class BaseState(object):
                 surface.blit(img, (x, y), HIT_DUCK_WHITE_RECT)
 
         # Show the score
+        ah20 = int(adjheight(20))
         surface.blit(img, SCORE_POSITION, SCORE_RECT)
-        font = pygame.font.Font(FONT, adjheight (20))
+        font = pygame.font.Font(FONT, ah20)
         text = font.render(str(self.registry.get('score')), True, FONT_WHITE);
         x, y = FONT_STARTING_POSITION
         x -= text.get_width();
