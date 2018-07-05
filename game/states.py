@@ -1,6 +1,7 @@
 import os, time
 import pygame
 import sounds
+import config
 from registry import adjpos, adjrect, adjwidth, adjheight
 from gun import Gun
 from duck import Duck
@@ -186,8 +187,9 @@ class RoundStartState(BaseState):
 class PlayState(BaseState):
     def __init__(self):
         super(PlayState, self).__init__()
+        #amount of ducks
         self.ducks = [Duck(self.registry), Duck(self.registry)]
-        self.roundTime = 10 # Seconds in a round
+        self.roundTime = config.timer # Seconds in a round
         self.frame = 0
         self.dogCanComeOut = False
         self.dogPosition = DOG_REPORT_POSITION
@@ -200,10 +202,12 @@ class PlayState(BaseState):
             hasFired = self.gun.shoot()
             for duck in self.ducks:
                 if hasFired and duck.isShot(event.pos):
-                    self.registry.set('score', self.registry.get('score') + 10)
+                    #score count
+                    self.registry.set('score', self.registry.get('score') + config.score)
                     self.hitDucks[self.hitDuckIndex] = True
                     self.hitDuckIndex += 1
                 elif not duck.isDead and self.gun.rounds <= 0:
+                    
                      duck.flyOff = True
 
     def update(self):
@@ -218,6 +222,7 @@ class PlayState(BaseState):
             duck.update()
 
         # Check round end
+        #timer (timer - self.timer) > self.roundTime + (the bigger the longer)
         timesUp = (timer - self.timer) > self.roundTime
         if not (timesUp or (self.ducks[0].isFinished and self.ducks[1].isFinished)):
             return None
@@ -225,6 +230,8 @@ class PlayState(BaseState):
         # Let any remaining ducks fly off
         for duck in self.ducks:
             if not duck.isFinished and not duck.isDead:
+                #timer on off?
+
                 duck.flyOff = True
                 return None
 

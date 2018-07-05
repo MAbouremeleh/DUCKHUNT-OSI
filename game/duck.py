@@ -122,7 +122,7 @@ class Duck(object):
         round = self.registry.get('round')
         frameWidth, frameHeight = FRAME_SIZE
         #speed of ducks
-        speedRange = range(config.speedx+round, config.speedy+round)
+        speedRange = range(config.speedx + int(round/config.roundSpeed), config.speedy+int(round/config.roundSpeed))
         x, y = self.position
         coinToss = 1 if random.randint(0, 1) else -1
 
