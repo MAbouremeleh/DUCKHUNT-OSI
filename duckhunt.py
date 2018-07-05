@@ -1,4 +1,5 @@
 import os, sys
+import config
 import pygame
 import pygame.transform
 from game.registry import adjpos, adjrect, adjwidth, adjheight
@@ -6,7 +7,8 @@ from game.registry import adjpos, adjrect, adjwidth, adjheight
 # Game parameters
 SCREEN_WIDTH, SCREEN_HEIGHT = adjpos (800, 500)
 TITLE = "Symons Media: Duck Hunt"
-FRAMES_PER_SEC = 50
+FRAMES_PER_SEC = config.frames
+
 BG_COLOR = 255, 255, 255
 
 # Initialize pygame before importing modules
