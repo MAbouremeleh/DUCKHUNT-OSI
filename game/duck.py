@@ -1,5 +1,6 @@
 import os, sys, random
 import pygame
+import config
 import states
 from registry import adjpos, adjrect, adjwidth, adjheight
 
@@ -120,7 +121,8 @@ class Duck(object):
         surface = self.registry.get('surface')
         round = self.registry.get('round')
         frameWidth, frameHeight = FRAME_SIZE
-        speedRange = range(4+round, 6+round)
+        #speed of ducks
+        speedRange = range(config.speedx+round, config.speedy+round)
         x, y = self.position
         coinToss = 1 if random.randint(0, 1) else -1
 

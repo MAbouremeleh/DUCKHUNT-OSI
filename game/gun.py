@@ -1,10 +1,12 @@
 import os, sys
 import pygame
+import config
 
 class Gun(object):
     def __init__(self, registry):
         self.registry = registry
-        self.rounds = 3
+        #num of bullets
+        self.rounds = config.numRounds
         self.mousePos = (0,0) # Starting postion
         self.mouseImg = pygame.image.load(os.path.join('media', 'crosshairs.png'))
 
@@ -13,7 +15,8 @@ class Gun(object):
         surface.blit(self.mouseImg, self.mousePos)
 
     def reloadIt(self):
-        self.rounds = 3
+        #num of bullets per reload
+        self.rounds = config.numReload
 
     def moveCrossHairs(self, pos):
         xOffset = self.mouseImg.get_width() / 2
