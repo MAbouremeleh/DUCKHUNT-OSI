@@ -44,7 +44,7 @@ class BaseState(object):
         self.timer = int(time.time())
         self.notices = set()
         self.gun = Gun(self.registry)
-        self.hitDucks = [False for i in range(10)]
+        self.hitDucks = [False for i in range(config.testnum)]
         self.hitDuckIndex = 0
 
     def renderNotices(self):
@@ -89,7 +89,8 @@ class BaseState(object):
         # Show the hit counter
         surface.blit(controlImgs, HIT_POSITION, HIT_RECT)
         startingX, startingY = HIT_DUCK_POSITION
-        for i in range(10):
+
+        for i in range(config.testnum):
             x = startingX + adjwidth (i * 18)
             y = startingY
             if self.hitDucks[i]:
@@ -189,6 +190,11 @@ class PlayState(BaseState):
         super(PlayState, self).__init__()
         #amount of ducks
         self.ducks = [Duck(self.registry), Duck(self.registry)]
+        #amt of ducks plus 2^
+        xyz = 0
+        while xyz < config.amtDucks:
+            self.ducks.append(Duck(self.registry))
+            xyz = xyz + 1
         self.roundTime = config.timer # Seconds in a round
         self.frame = 0
         self.dogCanComeOut = False
@@ -319,7 +325,7 @@ class RoundEndState(BaseState):
             if i == False:
                 missedCount += 1
         # Miss 4 or more and you're done
-        if missedCount >= 4:
+        if missedCount >= config.miss:
             self.isGameOver = True
             self.notices = ("GAMEOVER", "")
             self.registry.get('soundHandler').enqueue('gameover')
