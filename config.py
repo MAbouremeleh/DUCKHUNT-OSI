@@ -1,7 +1,7 @@
 numRounds = 3
 numReload = numRounds
 
-speedx = 4.1
+speedx = 4
 speedy = speedx + 2
 score = 10
 timer = 10

@@ -54,6 +54,13 @@ class BaseState(object):
             self.notices.add("")
 
         surface = self.registry.get('surface')
+        font = pygame.font.SysFont("Arial", 16, bold=True) #Font / size PEARDECK
+        text = font.render("Variables used: Outside & inside temp, setpoints, window tint, Building kW/h", True, (255, 255, 255))#RGB values / text color
+        text2 = font.render("Effects: Speed of ducks, timer, bullets, score", True, (255, 255, 255))
+        #surface.blit(text,(320 - text.get_width() // 2, 240 - text.get_height() // 2)) #Location
+        surface.blit(text,(300,400,)) #changes location
+        surface.blit(text2,(300, 420))
+
         controlImgs = self.registry.get('controlImgs')
         ah20 = int(adjheight(20))
         font = pygame.font.Font(FONT,ah20)
@@ -124,6 +131,7 @@ class RoundStartState(BaseState):
         self.dogPosition = DOG_POSITION
         self.barkCount = 0
 
+
     def execute(self, event):
         pass
 
@@ -142,6 +150,13 @@ class RoundStartState(BaseState):
     def render(self):
         timer = int(time.time())
         surface = self.registry.get('surface')
+
+        font = pygame.font.SysFont("Arial", 16, bold=True) #Font / size PEARDECK
+        text = font.render("Variables used: Outside & inside temp, setpoints, window tint, Building kW/h", True, (255, 255, 255))#RGB values / text color
+        text2 = font.render("Effects: Speed of ducks, timer, bullets, score", True, (255, 255, 255))
+        #surface.blit(text,(320 - text.get_width() // 2, 240 - text.get_height() // 2)) #Location
+        surface.blit(text,(300,400,)) #changes location
+        surface.blit(text2,(300, 420))
         sprites = self.registry.get('sprites')
         x, y = self.dogPosition
         width, height = DOG_FRAME
@@ -255,6 +270,12 @@ class PlayState(BaseState):
     def render(self):
         timer = int(time.time())
         surface = self.registry.get('surface')
+        font = pygame.font.SysFont("Arial", 16, bold=True) #Font / size PEARDECK
+        text = font.render("Variables used: Outside & inside temp, setpoints, window tint, Building kW/h", True, (255, 255, 255))#RGB values / text color
+        text2 = font.render("Effects: Speed of ducks, timer, bullets, score", True, (255, 255, 255))
+        #surface.blit(text,(320 - text.get_width() // 2, 240 - text.get_height() // 2)) #Location
+        surface.blit(text,(300,400,)) #changes location
+        surface.blit(text2,(300, 420))
         sprites = self.registry.get('sprites')
 
         # Show the controls
