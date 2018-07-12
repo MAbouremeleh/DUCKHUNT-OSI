@@ -217,9 +217,9 @@ class PlayState(BaseState):
         self.dogdy = 5
 
     def execute(self, event):
-        if event.type == pygame.JOYAXISMOTION: #PEARDECK MOUSEMOTION
+        if (event.type == pygame.JOYAXISMOTION) | bool(~(self.gun.neutralJoystick())): #PEARDECK MOUSEMOTION
             print ("IN IF")
-            self.gun.moveCrossHairs(0)
+            self.gun.moveCrossHairs()
             #change to button instead of mouse button
         elif event.type == pygame.MOUSEBUTTONDOWN:
             hasFired = self.gun.shoot()

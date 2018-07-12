@@ -33,12 +33,14 @@ class Gun(object):
         current_horz = int(self._joystick.get_axis(0)*1.5)
         return current_horz, current_vert
 
+    def neutralJoystick(self):
+        return ((int(self._joystick.get_axis(1)*1.5) == 0) & (int(self._joystick.get_axis(0)*1.5)) == 0)
 
     # method where you will want to use joystick inputs PEARDECK
     # initially get an idea of what the values currently being used for x,y,xoffset,yoffset are from the mouse -- print
         # run with old method, print values
     # mousePos = (x,y)
-    def moveCrossHairs(self, pos):
+    def moveCrossHairs(self):
        # xOffset = self.mouseImg.get_width() / 2
        # yOffset = self.mouseImg.get_height() / 2
        # x, y = pos
@@ -48,7 +50,7 @@ class Gun(object):
        x = int(self._joystick.get_axis(0)*1.5)
         #self.mousePos = (x - xOffset), (y - yOffset)
         # might have to put a ceiling and floor
-       self.mousePos = ((self.mousePos)[0] + x ), ((self.mousePos)[1] + y )
+       self.mousePos = ((self.mousePos)[0] + x*config.posSensitivity ), ((self.mousePos)[1] + y*config.posSensitivity )
        print (self.mousePos)
 
     def shoot(self):
