@@ -23,7 +23,7 @@ password = ""
 
 import requests, urllib3
 outsideTemp = "https://oakpicoresight.osisoft.int:8443/piwebapi/streams/F1AbEnqdqScCm70aDbETKiwGLjw_rj0BjAl5xGJN3xc-DlStAf8t01_W2UlkBVX-MbuLDQgT0FLUElBRlxGQUNJTElUSUVTLTE2MDAgQUxWQVJBRE9cU0xUQ1xXRUFUSEVSfE9VVFNJREUgQUlSIFRFTVBFUkFUVVJF/value"
-outsideTemp = requests.get(outsideTemp,verify=False,auth=(user,password),cert="certificate.cer").json()
+#outsideTemp = requests.get(outsideTemp,verify=False,auth=(user,password),cert="certificate.cer").json()
 print (outsideTemp)
 
 numRounds = 3
