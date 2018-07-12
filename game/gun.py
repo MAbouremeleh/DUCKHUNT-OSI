@@ -1,6 +1,7 @@
 import os, sys
 import pygame
 import config
+import duckhunt
 
 class Gun(object):
     def __init__(self, registry):
@@ -9,6 +10,13 @@ class Gun(object):
         self.rounds = config.numRounds
         self.mousePos = (0,0) # Starting postion
         self.mouseImg = pygame.image.load(os.path.join('media', 'crosshairs.png'))
+
+         #PEARDECK initialize self._joystick here
+        self._joystick = pygame.joystick.Joystick(0)
+        self._joystick.init()
+        pygame.event.pump()
+        pygame.event.get()
+
 
     def render(self):
         surface = self.registry.get('surface')
@@ -20,8 +28,9 @@ class Gun(object):
 
         # this method needs to return information about the state of the joystick PEARDECK
     def getJoystickPos(self):
-        current_vert = int(_joystick.get_axis(1)*1.5)
-        current_horz = int(_joystick.get_axis(0)*1.5)
+        pygame.event.get()
+        current_vert = int(self._joystick.get_axis(1)*1.5)
+        current_horz = int(self._joystick.get_axis(0)*1.5)
         return current_horz, current_vert
 
 
@@ -33,12 +42,14 @@ class Gun(object):
        # xOffset = self.mouseImg.get_width() / 2
        # yOffset = self.mouseImg.get_height() / 2
        # x, y = pos
-
-        x, y = getJoystickPos(self)
-
+       print ("POSITION")
+       pygame.event.get()
+       y = int(self._joystick.get_axis(1)*1.5)
+       x = int(self._joystick.get_axis(0)*1.5)
         #self.mousePos = (x - xOffset), (y - yOffset)
         # might have to put a ceiling and floor
-        self.mousePos = ((self.mousePos)[0] + x * config.posSensitivity), ((self.mousePos)[1] + y * config.posSensitivity)
+       self.mousePos = ((self.mousePos)[0] + x ), ((self.mousePos)[1] + y )
+       print (self.mousePos)
 
     def shoot(self):
         if self.rounds <= 0:
