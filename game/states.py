@@ -219,6 +219,7 @@ class PlayState(BaseState):
     def execute(self, event):
         if event.type == pygame.MOUSEMOTION:
             self.gun.moveCrossHairs(event.pos)
+            #change to button instead of mouse button
         elif event.type == pygame.MOUSEBUTTONDOWN:
             hasFired = self.gun.shoot()
             for duck in self.ducks:

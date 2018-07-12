@@ -18,11 +18,27 @@ class Gun(object):
         #num of bullets per reload
         self.rounds = config.numReload
 
+        # this method needs to return information about the state of the joystick PEARDECK
+    def getJoystickPos(self):
+        current_vert = int(_joystick.get_axis(1)*1.5)
+        current_horz = int(_joystick.get_axis(0)*1.5)
+        return current_horz, current_vert
+
+
+    # method where you will want to use joystick inputs PEARDECK
+    # initially get an idea of what the values currently being used for x,y,xoffset,yoffset are from the mouse -- print
+        # run with old method, print values
+    # mousePos = (x,y)
     def moveCrossHairs(self, pos):
-        xOffset = self.mouseImg.get_width() / 2
-        yOffset = self.mouseImg.get_height() / 2
-        x, y = pos
-        self.mousePos = (x - xOffset), (y - yOffset)
+       # xOffset = self.mouseImg.get_width() / 2
+       # yOffset = self.mouseImg.get_height() / 2
+       # x, y = pos
+
+        x, y = getJoystickPos(self)
+
+        #self.mousePos = (x - xOffset), (y - yOffset)
+        # might have to put a ceiling and floor
+        self.mousePos = ((self.mousePos)[0] + x * config.posSensitivity), ((self.mousePos)[1] + y * config.posSensitivity)
 
     def shoot(self):
         if self.rounds <= 0:
