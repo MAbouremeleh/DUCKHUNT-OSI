@@ -37,6 +37,7 @@ class Game(object):
     def init(self):
         self.surface = pygame.display.set_mode(self.size)
         self.driver = game.driver.Driver(self.surface)
+        pygame.joystick.init()
 
     def handleEvent(self, event):
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key is 27):

@@ -23,6 +23,9 @@
     <Compile Include="game\driver.py" />
     <Compile Include="game\duck.py" />
     <Compile Include="game\gun.py" />
+    <Compile Include="game\joystick_controls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="game\registry.py" />
     <Compile Include="game\sounds.py" />
     <Compile Include="game\states.py" />

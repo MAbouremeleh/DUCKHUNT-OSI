@@ -49,28 +49,7 @@ testnum = 10
 amtDucks = 0
 miss = 4
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+posSensitivity = 50
 
 
 
