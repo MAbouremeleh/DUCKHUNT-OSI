@@ -8,7 +8,7 @@ class Gun(object):
         self.registry = registry
         #num of bullets
         self.rounds = config.numRounds
-        self.mousePos = (0,0) # Starting postion
+        self.mousePos = (1,1) # Starting postion
         self.mouseImg = pygame.image.load(os.path.join('media', 'crosshairs.png'))
 
          #PEARDECK initialize self._joystick here
@@ -50,8 +50,14 @@ class Gun(object):
        x = int(self._joystick.get_axis(0)*1.5)
         #self.mousePos = (x - xOffset), (y - yOffset)
         # might have to put a ceiling and floor
-       self.mousePos = ((self.mousePos)[0] + x*config.posSensitivity ), ((self.mousePos)[1] + y*config.posSensitivity )
+       if (self.mousePos[0] + (x*config.posSensitivity) > 800 | self.mousePos[0]  + (x*config.posSensitivity) < 0 ):
+        self.mousePos == self.mousePos 
+       elif (self.mousePos[1] + (y*config.posSensitivity) > 500 | self.mousePos[1] + (y*config.posSensitivity) < 0 ):
+        self.mousePos == self.mousePos
+       else:
+        self.mousePos = ((self.mousePos[0] + x*config.posSensitivity ),(self.mousePos[1] + y*config.posSensitivity ))
        print (self.mousePos)
+       print (y,x)
 
     def shoot(self):
         if self.rounds <= 0:
