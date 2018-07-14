@@ -23,6 +23,7 @@ class Gun(object):
         yOffset = self.mouseImg.get_height() / 2
         x, y = pos
         self.mousePos = (x - xOffset), (y - yOffset)
+        print(self.mousePos)
 
     def shoot(self):
         if self.rounds <= 0:

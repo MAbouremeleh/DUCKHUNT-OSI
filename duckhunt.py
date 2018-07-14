@@ -5,7 +5,7 @@ import pygame.transform
 from game.registry import adjpos, adjrect, adjwidth, adjheight
 
 # Game parameters
-SCREEN_WIDTH, SCREEN_HEIGHT = adjpos (800, 500)
+SCREEN_WIDTH, SCREEN_HEIGHT = adjpos(800, 500)
 TITLE = "Symons Media: Duck Hunt"
 FRAMES_PER_SEC = config.frames
 
@@ -19,6 +19,7 @@ pygame.mouse.set_visible(False)
 
 import game.driver
 
+
 class Game(object):
     def __init__(self):
         self.running = True
@@ -26,12 +27,10 @@ class Game(object):
         self.clock = pygame.time.Clock()
         self.size = SCREEN_WIDTH, SCREEN_HEIGHT
 
-       
-
         background = os.path.join('media', 'background.jpg')
         bg = pygame.image.load(background)
         self.size = (int(self.size[0]), int(self.size[1]))
-        self.background = pygame.transform.smoothscale (bg, self.size)
+        self.background = pygame.transform.smoothscale(bg, self.size)
         self.driver = None
 
     def init(self):
@@ -49,7 +48,7 @@ class Game(object):
         self.driver.update()
 
     def render(self):
-        self.surface.blit(self.background, (0,0))
+        self.surface.blit(self.background, (0, 0))
         self.driver.render()
         pygame.display.flip()
 
@@ -62,11 +61,35 @@ class Game(object):
 
         while (self.running):
             for event in pygame.event.get():
+                type = event.type
+                # type = 2
+                print("event.dict.values()[1]: ", event.dict.values()[1])
+                if ((event.dict.values()[1] == 275) & (type == 2)):
+                    print("in and")
+                    # & event.type == 2):
+                    # change to be the joystick var -- 2 is keydown
+                    config.JSMOVEMENT = True
+                    # pygame.event.clear()
+                    pygame.event.post(event)
+                print("event type, key value, counter: ", event.type, event.dict.values()[1], config.COUNTER)
+                config.COUNTER += 1
+                # print(event.key)
                 self.handleEvent(event)
+
+                # does the event change when going back to neutral position?
+                # if so, when that happens change config back to false
+                if (config.JSMOVEMENT):
+                    config.JSMOVEMENT = False
+                    print ("resetting")
+                else:
+                    pygame.event.clear()
+                    break
+
             self.loop()
             self.render()
 
         self.cleanup()
+
 
 if __name__ == "__main__":
     theGame = Game()

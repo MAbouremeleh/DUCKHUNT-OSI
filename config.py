@@ -50,30 +50,5 @@ amtDucks = 0
 miss = 4
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+JSMOVEMENT = False
+COUNTER = 0
