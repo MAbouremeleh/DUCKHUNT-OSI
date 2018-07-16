@@ -43,12 +43,9 @@ class Game(object):
         pygame.joystick.init()
 
     def handleEvent(self, event):
-        print("shark")
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key is 27):
             self.running = False
-            print("koala")
         else:
-            print("kangaroo")
             self.driver.handleEvent(event)
 
     def loop(self):
@@ -67,16 +64,74 @@ class Game(object):
 
     def execute(self): 
         self.init()
-        print("apple")
         while (self.running):
+            #repeat = True
+            #while(repeat):
             
             for event in pygame.event.get():
-            #while((pygame.event.get().type == pygame.JOYAXISMOTION)):
-                print("peach")
+               # type = 2
+#                print("event.dict.values()[1]: ", event.dict.values()[1])
+                if ((event.type == pygame.JOYAXISMOTION)):
+                    # & event.type == 2):
+                    # change to be the joystick var -- 2 is keydown
+                    config.JSMOVEMENT = True
+                    # pygame.event.clear()
+                    pygame.event.post(event)
+                    print("adding event to queue")
+                #print("event type, key value, counter: ", event.type, event.dict.values()[1], config.COUNTER)
+                #config.COUNTER += 1
+                # print(event.key)
                 self.handleEvent(event)
+
+                # does the event change when going back to neutral position?
+                # if so, when that happens change config back to false
+                if (config.JSMOVEMENT):
+                    config.JSMOVEMENT = False
+                else:
+                    pygame.event.clear()
+                    #break
+
+                '''
+                print ("HERE")
+               print("type")
+                print(pygame.JOYAXISMOTION)
+                print(type)
+                # type = 2
+                #print("event.dict.values()[1]: ", (type))
+                if (~(self.neutralJoystick())):
+                    print("in and")
+                    # & event.type == 2):
+                    # change to be the joystick var -- 2 is keydown
+                    config.JSMOVEMENT = True
+                    # pygame.event.clear()
+                    pygame.event.post(event)
+                #print("event type, key value, counter: ", event.type, event.dict.values()[1], config.COUNTER)
+                config.COUNTER += 1
+                # print(event.key)
+                self.handleEvent(event)
+
+                # does the event change when going back to neutral position?
+                # if so, when that happens change config back to false
+                if (config.JSMOVEMENT):
+                    config.JSMOVEMENT = False
+                    print ("resetting")
+                else:
+                    pygame.event.clear()
+                    break
+                
+                
+ 
+                    print("PEACH:")
+                #while((pygame.event.get().type == pygame.JOYAXISMOTION)):
+                    self.handleEvent(event)
+                    if(event.type != pygame.JOYAXISMOTION):
+                        repeat = False
+                        
+                        '''
+
             self.loop()
             self.render()
-
+        
         self.cleanup()
 
 if __name__ == "__main__":

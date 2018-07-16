@@ -2,7 +2,7 @@ import os, sys
 import pygame
 import config
 import duckhunt
-
+import registry
 class Gun(object):
     def __init__(self, registry):
         self.registry = registry
@@ -11,7 +11,7 @@ class Gun(object):
         self.mousePos = (1,1) # Starting postion
         self.mouseImg = pygame.image.load(os.path.join('media', 'crosshairs.png'))
 
-         #PEARDECK initialize self._joystick here
+            #PEARDECK initialize self._joystick here
         self._joystick = pygame.joystick.Joystick(0)
         self._joystick.init()
         pygame.event.pump()
@@ -41,23 +41,29 @@ class Gun(object):
         # run with old method, print values
     # mousePos = (x,y)
     def moveCrossHairs(self):
-       # xOffset = self.mouseImg.get_width() / 2
-       # yOffset = self.mouseImg.get_height() / 2
-       # x, y = pos
-       print ("POSITION")
-       pygame.event.get()
-       y = int(self._joystick.get_axis(1)*1.5)
-       x = int(self._joystick.get_axis(0)*1.5)
+        # xOffset = self.mouseImg.get_width() / 2
+        # yOffset = self.mouseImg.get_height() / 2
+        # x, y = pos
+        pygame.event.get()
+        y = int(self._joystick.get_axis(1)*1.5)
+        x = int(self._joystick.get_axis(0)*1.5)
         #self.mousePos = (x - xOffset), (y - yOffset)
         # might have to put a ceiling and floor
-       if (self.mousePos[0] + (x*config.posSensitivity) > 800 | self.mousePos[0]  + (x*config.posSensitivity) < 0 ):
-        self.mousePos == self.mousePos 
-       elif (self.mousePos[1] + (y*config.posSensitivity) > 500 | self.mousePos[1] + (y*config.posSensitivity) < 0 ):
-        self.mousePos == self.mousePos
-       else:
+        #f (self.mousePos[0] + (x*config.posSensitivity) > 500 | self.mousePos[0]  + (x*config.posSensitivity) < 0 ):
+        #self.mousePos == self.mousePos 
+        #elif (self.mousePos[1] + (y*config.posSensitivity) > 800 | self.mousePos[1] + (y*config.posSensitivity) < 0 ):
+        #self.mousePos == self.mousePos
+        if (self.mousePos[0] + (x*config.posSensitivity) < -25 ):
+            self.mousePos = (-25,self.mousePos[1])
+        if (self.mousePos[0] + (x*config.posSensitivity) > (registry.ORIG_W - 25)):
+            self.mousePos = ((registry.ORIG_W - 25) ,self.mousePos[1])
+        if (self.mousePos[1] + (y*config.posSensitivity) < -25 ):
+            self.mousePos = ((self.mousePos[0]),-25)
+        if (self.mousePos[1] + (y*config.posSensitivity) > (registry.ORIG_H- 25) ):
+            self.mousePos = (self.mousePos[0],(registry.ORIG_H- 25))
         self.mousePos = ((self.mousePos[0] + x*config.posSensitivity ),(self.mousePos[1] + y*config.posSensitivity ))
-       print (self.mousePos)
-       print (y,x)
+       
+        print ("POSITION: ", self.mousePos, (x,y))
 
     def shoot(self):
         if self.rounds <= 0:

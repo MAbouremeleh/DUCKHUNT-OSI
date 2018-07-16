@@ -220,11 +220,7 @@ class PlayState(BaseState):
 
 
     def execute(self, event):
-        print("monkey")
         if (event.type == pygame.JOYAXISMOTION) | bool(~(self.gun.neutralJoystick())): #PEARDECK MOUSEMOTION
-            print("event.type")
-            print(event.type)
-            print ("IN IF")
             self.gun.moveCrossHairs() 
             #change to button instead of mouse button
         elif event.type == pygame.MOUSEBUTTONDOWN:

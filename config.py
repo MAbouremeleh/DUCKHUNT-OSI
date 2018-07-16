@@ -50,6 +50,8 @@ amtDucks = 0
 miss = 4
 
 posSensitivity = 30
+COUNTER = 0
+JSMOVEMENT = False
 
 
 
