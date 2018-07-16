@@ -34,13 +34,13 @@ class Gun(object):
         return current_horz, current_vert
 
     def neutralJoystick(self):
-        return ((int(self._joystick.get_axis(1)*1.5) == 0) & (int(self._joystick.get_axis(0)*1.5)) == 0)
+        return ((int(self._joystick.get_axis(0)*1.5) == 0) & ((int(self._joystick.get_axis(1)*1.5)) == 0))
 
     # method where you will want to use joystick inputs PEARDECK
     # initially get an idea of what the values currently being used for x,y,xoffset,yoffset are from the mouse -- print
         # run with old method, print values
     # mousePos = (x,y)
-    def moveCrossHairs(self):
+    def  moveCrossHairs(self):
         # xOffset = self.mouseImg.get_width() / 2
         # yOffset = self.mouseImg.get_height() / 2
         # x, y = pos
@@ -54,13 +54,13 @@ class Gun(object):
         #elif (self.mousePos[1] + (y*config.posSensitivity) > 800 | self.mousePos[1] + (y*config.posSensitivity) < 0 ):
         #self.mousePos == self.mousePos
         if (self.mousePos[0] + (x*config.posSensitivity) < -25 ):
-            self.mousePos = (-25,self.mousePos[1])
+            self.mousePos = (- 15 ,self.mousePos[1])
         if (self.mousePos[0] + (x*config.posSensitivity) > (registry.ORIG_W - 25)):
-            self.mousePos = ((registry.ORIG_W - 25) ,self.mousePos[1])
+            self.mousePos = ((registry.ORIG_W -35) ,self.mousePos[1])
         if (self.mousePos[1] + (y*config.posSensitivity) < -25 ):
-            self.mousePos = ((self.mousePos[0]),-25)
+            self.mousePos = ((self.mousePos[0]), -15)
         if (self.mousePos[1] + (y*config.posSensitivity) > (registry.ORIG_H- 25) ):
-            self.mousePos = (self.mousePos[0],(registry.ORIG_H- 25))
+            self.mousePos = (self.mousePos[0],(registry.ORIG_H- 35))
         self.mousePos = ((self.mousePos[0] + x*config.posSensitivity ),(self.mousePos[1] + y*config.posSensitivity ))
        
         print ("POSITION: ", self.mousePos, (x,y))
