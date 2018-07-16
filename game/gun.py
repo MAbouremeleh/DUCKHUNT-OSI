@@ -64,6 +64,12 @@ class Gun(object):
         self.mousePos = ((self.mousePos[0] + x*config.posSensitivity ),(self.mousePos[1] + y*config.posSensitivity ))
        
         print ("POSITION: ", self.mousePos, (x,y))
+        print(self._joystick.get_button(0))
+
+    def isShooting(self):
+        button = self._joystick.get_button(0)
+        if button == 1:
+            return True
 
     def shoot(self):
         if self.rounds <= 0:

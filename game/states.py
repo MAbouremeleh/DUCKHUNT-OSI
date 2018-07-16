@@ -220,14 +220,20 @@ class PlayState(BaseState):
 
 
     def execute(self, event):
-        if (event.type == pygame.JOYAXISMOTION) & (not(self.gun.neutralJoystick())): #PEARDECK MOUSEMOTION
+       
+        if (event.type == pygame.JOYAXISMOTION) | bool(~(self.gun.neutralJoystick())): #PEARDECK MOUSEMOTION
+            print("event.type")
+            print(event.type)
+            print ("IN IF")
             self.gun.moveCrossHairs() 
-            print("moving crosshairs")
             #change to button instead of mouse button
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        #if event.type == 11:
+            #print("BaNGBANG")
+        if self.gun.isShooting():
+            print("bangbangboom")
             hasFired = self.gun.shoot()
             for duck in self.ducks:
-                if hasFired and duck.isShot(event.pos):
+                if hasFired and duck.isShot(self.gun.mousePos):
                     #score count
                     self.registry.set('score', self.registry.get('score') + config.score)
                     self.hitDucks[self.hitDuckIndex] = True
@@ -383,7 +389,8 @@ class GameOverState(BaseState):
 
     def execute(self, event):
         # Click to restart
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == 11:
+        #if self.gun.isShooting():
             self.registry.set('score', 0)
             self.registry.set('round', 1)
             self.state = RoundStartState()
