@@ -71,17 +71,21 @@ class Game(object):
             for event in pygame.event.get():
                # type = 2
 #                print("event.dict.values()[1]: ", event.dict.values()[1])
-                if ((event.type == pygame.JOYAXISMOTION)):
-                    # & event.type == 2):
-                    # change to be the joystick var -- 2 is keydown
+                #print("Joystick Neutral?", neutralJoystick(Gun))
+                self.handleEvent(event)
+                if ((event.type == pygame.JOYAXISMOTION)):              
+                    # change to be the joystick var 
                     config.JSMOVEMENT = True
                     # pygame.event.clear()
+                    len(pygame.event.get())
                     pygame.event.post(event)
                     print("adding event to queue")
+
                 #print("event type, key value, counter: ", event.type, event.dict.values()[1], config.COUNTER)
                 #config.COUNTER += 1
-                # print(event.key)
-                self.handleEvent(event)
+                # print(event.key
+                
+               
 
                 # does the event change when going back to neutral position?
                 # if so, when that happens change config back to false
@@ -89,7 +93,7 @@ class Game(object):
                     config.JSMOVEMENT = False
                 else:
                     pygame.event.clear()
-                    #break
+                    break
 
                 '''
                 print ("HERE")

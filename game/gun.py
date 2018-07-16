@@ -72,3 +72,5 @@ class Gun(object):
         self.registry.get('soundHandler').enqueue('blast')
         self.rounds = self.rounds - 1
         return True
+
+    
